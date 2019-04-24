@@ -10,14 +10,6 @@ notes = {
 }
 
 
-def scrapt(url):
-    pass
-
-
-def get_data(data):
-    pass
-
-
 def note_repr(key):
     return {
         'url': request.host_url.rstrip('/') + url_for('notes_detail', key=key),
