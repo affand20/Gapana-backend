@@ -5,7 +5,7 @@ tugas Pengembangan Sistem Informasi
 
 Universitas Airlangga 2018
 
-#how to run this api 
+# how to run this api 
 
 install python3.7 
 
@@ -24,4 +24,4 @@ run pip install -r req.txt
 and run python app.py
 
 
-#documentation soon TBD
+# documentation soon TBD
