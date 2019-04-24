@@ -22,3 +22,6 @@ run source test/bin/activate
 run pip install -r req.txt
 
 and run python app.py
+
+
+#documentation soon TBD
