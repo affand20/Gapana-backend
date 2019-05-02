@@ -13,6 +13,16 @@ NEWS = db.reference('news')
 USER = db.reference('user')
 
 
+def news_repr(key):
+    return {
+        'title': '',
+        'subtitle': '',
+        'content': '',
+        'url': '',
+        'teaser': '',
+    }
+
+
 def _ensure_hero(ids):
     hero = NEWS.child(ids).get()
     if not hero:
@@ -23,16 +33,19 @@ def _ensure_hero(ids):
 def viewnews():
     return NEWS.get()
 
-
 def addnews(data):
     return NEWS.push(data)
 
-
 def updatenews(ids, data):
     _ensure_hero(ids)
-    NEWS.child(ids).update(data)
+    data = NEWS.child(ids).update(data)
+    return data
+
+def detailnews(ids):
+    return _ensure_hero(ids)
 
 
 def deletenews(ids):
     _ensure_hero(ids)
-    NEWS.child(ids).delete()
+    data = NEWS.child(ids).delete()
+    return data
