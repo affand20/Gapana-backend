@@ -1,37 +1,43 @@
+import flask
 from flask_api import FlaskAPI, status, exceptions
-from flask import request, url_for
+from flask import request, url_for, Flask
 from scrapt import scrapt
-from models import models
+from models.models import db, list_news_url
 
-app = FlaskAPI(__name__)
+app = Flask(__name__)
 
 
 # begin news
 @app.route('/news')
 def news_list():
-    data = models.viewnews()
-    return data
-
-
-@app.route('/refresh_news')
-def news_refresh():
-    data = models.viewnews()
-    return data
-
-
-@app.route('/detail_news/<int:id>')
-def detail_news(ids):
-    data = models.detailnews(ids)
-    return data
-
+    data = db.collection('news')
+    rest = data.get()
+    list_id = {}
+    for rests in rest:
+        list_id[rests.id] = rests.to_dict()
+    return flask.jsonify(
+        {'id': list_id}
+    )
 
 # end news
 
-# begin user
-@app.route('/user')
-def user():
-    return
+@app.route('/scrap_news')
+def scrap_auto():
+    url = list_news_url()
+    for i in url:
+        print(i)
+    doc_ref = db.collection('news').document('news_kompas')
+    doc_ref.set({
+        'image': 'image',
+        'news_source': '',
+        'subtitle': '',
+        'title': '',
+        'tag': '',
+        'teaser': '',
+        'url' : '',
+    })
 
+# begin user
 
 if __name__ == '__main__':
     app.run()
