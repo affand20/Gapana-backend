@@ -3,6 +3,7 @@ from flask_api import FlaskAPI, status, exceptions
 from flask import request, url_for, Flask
 from scrapt import scrapt
 from models.models import db, list_news_url
+from scrapt.scrapt import procced
 
 app = Flask(__name__)
 
@@ -24,18 +25,19 @@ def news_list():
 @app.route('/scrap_news')
 def scrap_auto():
     url = list_news_url()
-    for i in url:
-        print(i)
-    doc_ref = db.collection('news').document('news_kompas')
-    doc_ref.set({
-        'image': 'image',
-        'news_source': '',
-        'subtitle': '',
-        'title': '',
-        'tag': '',
-        'teaser': '',
-        'url' : '',
-    })
+    for i, k in url.items():
+        print(procced(i,k))
+    # doc_ref = db.collection('news').document('news_kompas')
+    # doc_ref.set({
+    #     'image': 'image',
+    #     'news_source': '',
+    #     'subtitle': '',
+    #     'title': '',
+    #     'tag': '',
+    #     'teaser': '',
+    #     'url' : '',
+    # })
+    return "AAAAA"
 
 # begin user
 

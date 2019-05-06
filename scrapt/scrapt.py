@@ -6,6 +6,18 @@ from selenium.webdriver.chrome.options import Options
 from models import models
 
 
+def procced(item, url):
+    if item == "kompas":
+        pass
+
+    if item == "detik":
+        data = scrapt_selenium(url)
+        get = getting_data_detik(data)
+
+    if item == "jatimnet":
+        pass
+
+
 def scrapt_selenium(url):
     option = Options()
     option.add_argument('--headless')
@@ -19,3 +31,17 @@ def scrapt_selenium(url):
 def scrap_requets(url):
     data = requests.get(url).text
     return BeautifulSoup(data, 'lxml')
+
+
+def getting_data_detik(data):
+    bs = data.find('div', {'class': 'list media_rows list-berita'})
+    cs = bs.findAll('article')
+    arr_news_source = []
+    arr_title = []
+    arr_date = []
+    arr_desc = []
+    for container in cs:
+        arr_news_source.append(container.a['href'])
+        arr_title.append(container.h2.text)
+        arr_desc.append(container.p)
+    return cs

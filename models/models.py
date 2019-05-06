@@ -13,7 +13,7 @@ USER = db.reference('user')
 
 def list_news_url():
     data = {
-        'detik':'https://www.detik.com/search/searchall?query=',
+        'detik':'https://www.detik.com/search/searchall?query=bencana',
         'kompas':'https://search.kompas.com/search/?q=',
         'jatimnet':'http://api.jatimnet.com/jinetapi/news?search=',
         'jawapos' : 'https://www.jawapos.com/?s=',
